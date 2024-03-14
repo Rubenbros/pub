@@ -28,7 +28,7 @@ public class Pub {
             throw new RuntimeException("QUE?! REPITE NO TE ESCUCHO ESTA LA MUSICA MUY ALTA");
         }
         if (estudiante && (bebida == VINO || bebida == CERVEZA || bebida == SIDRA)) {
-            price = price - price/10;
+            price = price - 1;
         }
         return price*cantidad;
     }
