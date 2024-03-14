@@ -12,12 +12,12 @@ public class Pub {
         }
         int price;
         if (bebida.equals(CERVEZA)) {
-            price = 74;
+            price = 5;
         }
         else if (bebida.equals(VINO)) {
-            price = 103;
+            price = 2;
         }
-        else if (bebida.equals(SIDRA)) price = 110;
+        else if (bebida.equals(SIDRA)) price = 2;
         else if (bebida.equals(SEX_ON_THE_BEACH)) {
             price = ingrediente5() + ingrediente3()*2 + ingrediente4();
         }
@@ -35,26 +35,26 @@ public class Pub {
 
     //Coca cola
     private int ingrediente1() {
-        return 65;
+        return 2;
     }
 
     //VINO
     private int ingrediente2() {
-        return 10;
+        return 2;
     }
 
     //Zumo de naranja
     private int ingrediente3() {
-        return 10;
+        return 1;
     }
 
     //Granadina
     private int ingrediente4() {
-        return 10;
+        return 1;
     }
 
     //Vodka
     private int ingrediente5() {
-        return 85;
+        return 5;
     }
 }
