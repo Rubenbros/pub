@@ -4,57 +4,69 @@ public class Pub {
     public static final String SIDRA = "ladron";
     public static final String SEX_ON_THE_BEACH = "sob";
     public static final String CALIMOTXO = "calimotxo";
-
+    
+    public static final int DESCUENTO_ESTUDIANTE = 1; 
+    
     public int calcularPrecio(String bebida, boolean estudiante, int cantidad) {
-
-        if (cantidad > 2 && (bebida == SEX_ON_THE_BEACH || bebida == CALIMOTXO)) {
+        if (cantidad > 2 && esCoctel(bebida)) {
             throw new RuntimeException("Demasiadas bebidas, maximo 2");
         }
         int price;
-        if (bebida.equals(CERVEZA)) {
-            price = 5;
-        }
-        else if (bebida.equals(VINO)) {
-            price = 2;
-        }
-        else if (bebida.equals(SIDRA)) price = 2;
-        else if (bebida.equals(SEX_ON_THE_BEACH)) {
-            price = ingrediente5() + ingrediente3()*2 + ingrediente4();
-        }
-        else if (bebida.equals(CALIMOTXO)) {
-            price = ingrediente1() + ingrediente2()*2;
-        }
-        else {
-            throw new RuntimeException("QUE?! REPITE NO TE ESCUCHO ESTA LA MUSICA MUY ALTA");
-        }
-        if (estudiante && (bebida == VINO || bebida == CERVEZA || bebida == SIDRA)) {
-            price = price - 1;
+        switch (bebida) {
+            case CERVEZA : 
+                price = 5;
+                break;
+            case VINO, SIDRA : 
+                price = 2;
+                break;
+            case SEX_ON_THE_BEACH :
+                price = calcularPrecioSexOnTheBeach();
+                break;
+            case CALIMOTXO :
+                price = calcularPrecioCalimotxo();
+                break;
+            default :
+                throw new RuntimeException("No tenemos de eso");
+        };
+        if (mereceDescuento(bebida, estudiante)) {
+            price = price - DESCUENTO_ESTUDIANTE;
         }
         return price*cantidad;
     }
 
-    //Coca cola
-    private int ingrediente1() {
+    private static boolean esCoctel(String bebida) {
+        return bebida.equals(SEX_ON_THE_BEACH) || bebida.equals(CALIMOTXO);
+    }
+
+    private static boolean mereceDescuento(String bebida, boolean estudiante) {
+        return estudiante && !esCoctel(bebida);
+    }
+
+    private static int calcularPrecioCalimotxo() {
+        return precioCocaCola() + precioVino() * 2;
+    }
+
+    private static int calcularPrecioSexOnTheBeach() {
+        return precioVodka() + (precioZumoDeNaranja() * 2) + precioGranadina();
+    }
+
+    private static int precioCocaCola() {
         return 2;
     }
 
-    //VINO
-    private int ingrediente2() {
+    private static int precioVino() {
         return 2;
     }
 
-    //Zumo de naranja
-    private int ingrediente3() {
+    private static int precioZumoDeNaranja() {
         return 1;
     }
 
-    //Granadina
-    private int ingrediente4() {
+    private static int precioGranadina() {
         return 1;
     }
 
-    //Vodka
-    private int ingrediente5() {
+    private static int precioVodka() {
         return 5;
     }
 }
